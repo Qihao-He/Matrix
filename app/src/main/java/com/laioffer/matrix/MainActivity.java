@@ -28,19 +28,6 @@ public class MainActivity extends AppCompatActivity {
                 Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
 
-    /**
-     * A dummy function to get fake event names.
-     */
-    private String[] getEventNames() {
-        String[] names = {
-                "Event1", "Event2", "Event3",
-                "Event4", "Event5", "Event6",
-                "Event7", "Event8", "Event9",
-                "Event10", "Event11", "Event12"};
-        return names;
-    }
-
-
     @Override
     protected void onStart() {
         super.onStart();
