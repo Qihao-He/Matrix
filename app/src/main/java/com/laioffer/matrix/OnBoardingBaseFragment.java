@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +25,7 @@ public abstract class OnBoardingBaseFragment extends Fragment {
     protected EditText usernameEditText;
     protected EditText passwordEditText;
     protected Button submitButton;
+    protected DatabaseReference database;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,6 +35,7 @@ public abstract class OnBoardingBaseFragment extends Fragment {
         usernameEditText = (EditText) view.findViewById(R.id.editTextLogin);
         passwordEditText = (EditText) view.findViewById(R.id.editTextPassword);
         submitButton = (Button) view.findViewById(R.id.submit);
+        database = FirebaseDatabase.getInstance().getReference();
         return view;
 
     }
