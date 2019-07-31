@@ -53,12 +53,14 @@ public class LoginFragment extends OnBoardingBaseFragment {
                 database.child("user").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.hasChild(username) && (password.equals(dataSnapshot.child(username).child("user_password").getValue()))) {
+                        if (dataSnapshot.hasChild(username) && (password.equals
+                                (dataSnapshot.child(username).child("user_password").getValue()))) {
                             Config.username = username;
                             startActivity(new Intent(getActivity(), ControlPanel.class));
-
+                            getActivity().finish();
                         } else {
-                            Toast.makeText(getActivity(),"Please try to login again", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(),"Please try to login again",
+                                    Toast.LENGTH_SHORT).show();
                         }
                     }
 
