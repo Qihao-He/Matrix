@@ -11,6 +11,8 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -81,6 +83,14 @@ public class ReportDialog extends Dialog {
 
         setupRecyclerView(dialogView);
         mViewSwitcher = (ViewSwitcher) dialogView.findViewById(R.id.viewSwitcher);
+        Animation slide_in_left = AnimationUtils.loadAnimation(getContext(),
+                android.R.anim.slide_in_left);
+        Animation slide_out_right = AnimationUtils.loadAnimation(getContext(),
+                android.R.anim.slide_out_right);
+        mViewSwitcher.setInAnimation(slide_in_left);
+        mViewSwitcher.setOutAnimation(slide_out_right);
+
+        setUpEventSpecs(dialogView);
     }
     private void setupRecyclerView(View dialogView) {
         mRecyclerView = dialogView.findViewById(R.id.recycler_view);
@@ -103,8 +113,7 @@ public class ReportDialog extends Dialog {
         if (mViewSwitcher != null) {
             mViewSwitcher.showNext();
             mTypeTextView.setText(mEventype);
-            mEventTypeImg.setImageDrawable(ContextCompat.getDrawable(getContext(),Config.trafficMap.get(mEventype));
-
+            mEventTypeImg.setImageDrawable(ContextCompat.getDrawable(getContext(),Config.trafficMap.get(mEventype)));
         }
     }
 
