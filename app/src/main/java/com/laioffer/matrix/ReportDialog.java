@@ -38,7 +38,12 @@ public class ReportDialog extends Dialog {
     private EditText mCommentEditText;
     private ImageView mEventTypeImg;
     private TextView mTypeTextView;
+    private DialogCallBack mDialogCallBack;
 
+    interface DialogCallBack {
+        void onSubmit(String editString, String event_type);
+        void startCamera();
+    }
 
     public ReportDialog(@NonNull Context context) {
         this(context, R.style.MyAlertDialogStyle);
