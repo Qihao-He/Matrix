@@ -42,6 +42,7 @@ public class ReportDialog extends Dialog {
 
     interface DialogCallBack {
         void onSubmit(String editString, String event_type);
+
         void startCamera();
     }
 
@@ -49,7 +50,9 @@ public class ReportDialog extends Dialog {
         this(context, R.style.MyAlertDialogStyle);
     }
 
-    public ReportDialog(@NonNull Context context, int themeResId) { super(context, themeResId); }
+    public ReportDialog(@NonNull Context context, int themeResId) {
+        super(context, themeResId);
+    }
 
     public static ReportDialog newInstance(Context context, int cx, int cy, DialogCallBack dialogCallBack) {
 
@@ -97,6 +100,7 @@ public class ReportDialog extends Dialog {
         mViewSwitcher.setOutAnimation(slide_out_right);
         setUpEventSpecs(dialogView);
     }
+
     private void setupRecyclerView(View dialogView) {
         mRecyclerView = dialogView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
@@ -118,7 +122,7 @@ public class ReportDialog extends Dialog {
         if (mViewSwitcher != null) {
             mViewSwitcher.showNext();
             mTypeTextView.setText(mEventype);
-            mEventTypeImg.setImageDrawable(ContextCompat.getDrawable(getContext(),Config.trafficMap.get(mEventype)));
+            mEventTypeImg.setImageDrawable(ContextCompat.getDrawable(getContext(), Config.trafficMap.get(mEventype)));
         }
     }
 
@@ -168,7 +172,6 @@ public class ReportDialog extends Dialog {
                     super.onAnimationEnd(animation);
                     view.setVisibility(View.INVISIBLE);
                     dismiss();
-
                 }
             });
             anim.setDuration(500);
