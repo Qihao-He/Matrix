@@ -13,10 +13,14 @@ import android.view.ViewAnimationUtils;
 import android.view.Window;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class ReportDialog extends Dialog {
     private int cx;
     private int cy;
+    private RecyclerView mRecyclerView;
+    private ReportRecyclerViewAdapter mRecyclerViewAdapter;
+
 
     public ReportDialog(@NonNull Context context) {
         this(context, R.style.MyAlertDialogStyle);
