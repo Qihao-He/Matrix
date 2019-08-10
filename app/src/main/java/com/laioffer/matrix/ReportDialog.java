@@ -80,6 +80,7 @@ public class ReportDialog extends Dialog {
             @Override
             public void setItem(String item) {
                 // for switch item
+                showNextViewSwitcher(item);
             }
         });
 
