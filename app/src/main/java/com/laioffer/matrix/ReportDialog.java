@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -101,6 +102,9 @@ public class ReportDialog extends Dialog {
         mEventype = item;
         if (mViewSwitcher != null) {
             mViewSwitcher.showNext();
+            mTypeTextView.setText(mEventype);
+            mEventTypeImg.setImageDrawable(ContextCompat.getDrawable(getContext(),Config.trafficMap.get(mEventype));
+
         }
     }
 
