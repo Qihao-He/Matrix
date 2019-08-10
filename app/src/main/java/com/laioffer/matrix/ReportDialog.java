@@ -11,6 +11,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.Window;
+import android.widget.ViewSwitcher;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -21,7 +22,8 @@ public class ReportDialog extends Dialog {
     private int cy;
     private RecyclerView mRecyclerView;
     private ReportRecyclerViewAdapter mRecyclerViewAdapter;
-
+    private ViewSwitcher mViewSwitcher;
+    private String mEventype;
 
     public ReportDialog(@NonNull Context context) {
         this(context, R.style.MyAlertDialogStyle);
@@ -67,6 +69,7 @@ public class ReportDialog extends Dialog {
         });
 
         setupRecyclerView(dialogView);
+        mViewSwitcher = (ViewSwitcher) dialogView.findViewById(R.id.viewSwitcher);
     }
     private void setupRecyclerView(View dialogView) {
         mRecyclerView = dialogView.findViewById(R.id.recycler_view);
