@@ -127,7 +127,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Report
 
     @Override
     public void onSubmit(String editString, String event_type) {
-
+        String key = uploadEvent(Config.username, editString, event_type);
     }
 
     @Override
