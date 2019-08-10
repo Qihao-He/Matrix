@@ -72,6 +72,16 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
+        fabFocus = (FloatingActionButton) view.findViewById(R.id.fab_focus);
+
+        fabFocus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mapView.getMapAsync(MainFragment.this);
+            }
+        });
+
+
         if (mapView != null) {
             mapView.onCreate(null);
             mapView.onResume();// needed to get the map to display immediately
