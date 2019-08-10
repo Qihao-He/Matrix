@@ -129,6 +129,15 @@ public class ReportDialog extends Dialog {
         mCommentEditText = (EditText) dialogView.findViewById(R.id.event_comment);
         mEventTypeImg = (ImageView) dialogView.findViewById(R.id.event_type_img);
         mTypeTextView = (TextView) dialogView.findViewById(R.id.event_type);
+
+        mSendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDialogCallBack.onSubmit(mCommentEditText.getText().toString(), mEventype);
+
+            }
+        });
+
     }
 
     private void animateDialog(View dialogView, boolean open) {
