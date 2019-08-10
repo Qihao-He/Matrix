@@ -13,6 +13,7 @@ import android.view.ViewAnimationUtils;
 import android.view.Window;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ReportDialog extends Dialog {
@@ -65,6 +66,21 @@ public class ReportDialog extends Dialog {
             }
         });
     }
+    private void setupRecyclerView(View dialogView) {
+        mRecyclerView = dialogView.findViewById(R.id.recycler_view);
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        mRecyclerViewAdapter = new ReportRecyclerViewAdapter(getContext(), Config.listItems);
+        mRecyclerViewAdapter.setClickListener(new ReportRecyclerViewAdapter
+                .OnClickListener() {
+            @Override
+            public void setItem(String item) {
+                // for switch item
+            }
+        });
+
+        mRecyclerView.setAdapter(mRecyclerViewAdapter);
+    }
+
 
     private void animateDialog(View dialogView, boolean open) {
         final View view = dialogView.findViewById(R.id.dialog);
