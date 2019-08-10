@@ -22,6 +22,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 /**
@@ -35,6 +37,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
     private FloatingActionButton fabReport;
     private FloatingActionButton fabFocus;
     private ReportDialog dialog;
+    private DatabaseReference database;
 
     public static MainFragment newInstance() {
 
@@ -54,6 +57,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_main, container,
                 false);
+        database = FirebaseDatabase.getInstance().getReference();
         return view;
     }
 

@@ -89,7 +89,6 @@ public class ReportDialog extends Dialog {
                 android.R.anim.slide_out_right);
         mViewSwitcher.setInAnimation(slide_in_left);
         mViewSwitcher.setOutAnimation(slide_out_right);
-
         setUpEventSpecs(dialogView);
     }
     private void setupRecyclerView(View dialogView) {
