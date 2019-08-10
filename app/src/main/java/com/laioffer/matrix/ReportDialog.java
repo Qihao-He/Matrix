@@ -11,6 +11,10 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 import androidx.annotation.NonNull;
@@ -24,14 +28,20 @@ public class ReportDialog extends Dialog {
     private ReportRecyclerViewAdapter mRecyclerViewAdapter;
     private ViewSwitcher mViewSwitcher;
     private String mEventype;
+    //Event specs
+    private ImageView mImageCamera;
+    private Button mBackButton;
+    private Button mSendButton;
+    private EditText mCommentEditText;
+    private ImageView mEventTypeImg;
+    private TextView mTypeTextView;
+
 
     public ReportDialog(@NonNull Context context) {
         this(context, R.style.MyAlertDialogStyle);
     }
 
-    public ReportDialog(@NonNull Context context, int themeResId) {
-        super(context, themeResId);
-    }
+    public ReportDialog(@NonNull Context context, int themeResId) { super(context, themeResId); }
 
     public static ReportDialog newInstance(Context context, int cx, int cy) {
 
@@ -92,6 +102,15 @@ public class ReportDialog extends Dialog {
         if (mViewSwitcher != null) {
             mViewSwitcher.showNext();
         }
+    }
+
+    private void setUpEventSpecs(final View dialogView) {
+        mImageCamera = (ImageView) dialogView.findViewById(R.id.event_camera_img);
+        mBackButton = (Button) dialogView.findViewById(R.id.event_back_button);
+        mSendButton = (Button) dialogView.findViewById(R.id.event_send_button);
+        mCommentEditText = (EditText) dialogView.findViewById(R.id.event_comment);
+        mEventTypeImg = (ImageView) dialogView.findViewById(R.id.event_type_img);
+        mTypeTextView = (TextView) dialogView.findViewById(R.id.event_type);
     }
 
     private void animateDialog(View dialogView, boolean open) {
