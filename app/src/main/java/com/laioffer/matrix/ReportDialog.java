@@ -51,11 +51,12 @@ public class ReportDialog extends Dialog {
 
     public ReportDialog(@NonNull Context context, int themeResId) { super(context, themeResId); }
 
-    public static ReportDialog newInstance(Context context, int cx, int cy) {
+    public static ReportDialog newInstance(Context context, int cx, int cy, DialogCallBack dialogCallBack) {
 
         ReportDialog dialog = new ReportDialog(context, R.style.MyAlertDialogStyle);
         dialog.cx = cx;
         dialog.cy = cy;
+        dialog.mDialogCallBack = dialogCallBack;
         return dialog;
     }
 

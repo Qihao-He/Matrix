@@ -16,7 +16,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -122,7 +121,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
     private void showDialog(String label, String prefillText) {
         int cx = (int) (fabReport.getX() + (fabReport.getWidth() / 2));
         int cy = (int) (fabReport.getY()) + fabReport.getHeight() + 56;
-        dialog = ReportDialog.newInstance(getContext(), cx, cy);
+        dialog = ReportDialog.newInstance(getContext(), cx, cy, );
         dialog.show();
     }
 
