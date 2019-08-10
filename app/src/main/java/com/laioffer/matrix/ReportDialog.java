@@ -65,6 +65,8 @@ public class ReportDialog extends Dialog {
                 return false;
             }
         });
+
+        setupRecyclerView(dialogView);
     }
     private void setupRecyclerView(View dialogView) {
         mRecyclerView = dialogView.findViewById(R.id.recycler_view);
