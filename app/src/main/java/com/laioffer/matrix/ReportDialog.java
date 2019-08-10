@@ -86,6 +86,12 @@ public class ReportDialog extends Dialog {
         mRecyclerView.setAdapter(mRecyclerViewAdapter);
     }
 
+    private void showNextViewSwitcher(String item) {
+        mEventype = item;
+        if (mViewSwitcher != null) {
+            mViewSwitcher.showNext();
+        }
+    }
 
     private void animateDialog(View dialogView, boolean open) {
         final View view = dialogView.findViewById(R.id.dialog);
