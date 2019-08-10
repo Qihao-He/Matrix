@@ -33,6 +33,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
     private GoogleMap googleMap;
     private LocationTracker locationTracker;
     private FloatingActionButton fabReport;
+    private FloatingActionButton fabFocus;
     private ReportDialog dialog;
 
     public static MainFragment newInstance() {
