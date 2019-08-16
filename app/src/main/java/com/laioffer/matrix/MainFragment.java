@@ -127,6 +127,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Report
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
         verifyStoragePermissions(getActivity());
+        setupBottomBehavior();
         return view;
     }
 
@@ -398,4 +399,23 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Report
     }
 
 
+    private void setupBottomBehavior() {
+        //set up bottom up slide
+        final View nestedScrollView = (View) view.findViewById(R.id.nestedScrollView);
+        bottomSheetBehavior = BottomSheetBehavior.from(nestedScrollView);
+
+        //set hidden initially
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+
+        //set expansion speed
+        bottomSheetBehavior.setPeekHeight(1000);
+
+        mEventImageLike = (ImageView) view.findViewById(R.id.event_info_like_img);
+        mEventImageComment = (ImageView) view.findViewById(R.id.event_info_comment_img);
+        mEventImageType = (ImageView) view.findViewById(R.id.event_info_type_img);
+        mEventTextLike = (TextView) view.findViewById(R.id.event_info_like_text);
+        mEventTextType = (TextView) view.findViewById(R.id.event_info_type_text);
+        mEventTextLocation = (TextView) view.findViewById(R.id.event_info_location_text);
+        mEventTextTime = (TextView) view.findViewById(R.id.event_info_time_text);
+    }
 }
