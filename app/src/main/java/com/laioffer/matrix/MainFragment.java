@@ -13,6 +13,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
@@ -245,6 +246,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Report
     @Override
     public void onMapReady(GoogleMap googleMap) {
         MapsInitializer.initialize(getContext());
+        googleMap.setOnMarkerClickListener(this);
 
         this.googleMap = googleMap;
         this.googleMap.setMapStyle(
@@ -393,8 +395,47 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Report
         });
     }
 
+
     @Override
     public boolean onMarkerClick(Marker marker) {
+        mEvent = (TrafficEvent) marker.getTag();
+        if (mEvent == null) {
+            return true;
+        }
+        String user = mEvent.getEvent_reporter_id();
+        String type = mEvent.getEvent_type();
+        long time = mEvent.getEvent_timestamp();
+        double latitude = mEvent.getEvent_latitude();
+        double longitutde = mEvent.getEvent_longitude();
+        int likeNumber = mEvent.getEvent_like_number();
+
+        String description = mEvent.getEvent_description();
+        marker.setTitle(description);
+        mEventTextLike.setText(String.valueOf(likeNumber));
+        mEventTextType.setText(type);
+
+        mEventImageType.setImageDrawable(ContextCompat.getDrawable(getContext(), Config.trafficMap.get(type)));
+
+        if (user == null) {
+            user = "";
+        }
+        String info = "Reported by " + user + " " + Utils.timeTransformer(time);
+        mEventTextTime.setText(info);
+
+
+        int distance = 0;
+        locationTracker = new LocationTracker(getActivity());
+        locationTracker.getLocation();
+        if (locationTracker != null) {
+            distance = Utils.distanceBetweenTwoLocations(latitude, longitutde, locationTracker.getLatitude(), locationTracker.getLongitude());
+        }
+        mEventTextLocation.setText(distance + " miles away");
+
+        if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN) {
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        } else {
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        }
         return false;
     }
 
