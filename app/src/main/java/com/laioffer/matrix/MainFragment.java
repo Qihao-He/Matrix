@@ -20,6 +20,8 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -36,6 +38,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -56,7 +59,7 @@ import static android.app.Activity.RESULT_OK;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MainFragment extends Fragment implements OnMapReadyCallback, ReportDialog.DialogCallBack {
+public class MainFragment extends Fragment implements OnMapReadyCallback, ReportDialog.DialogCallBack, GoogleMap.OnMarkerClickListener {
     private static final int REQUEST_CAPTURE_IMAGE = 100;
     private final String path = Environment.getExternalStorageDirectory() + "/temp.png";
     private MapView mapView;
@@ -65,6 +68,17 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Report
     private LocationTracker locationTracker;
     private FloatingActionButton fabReport;
     private FloatingActionButton fabFocus;
+
+    //event information part
+    private BottomSheetBehavior bottomSheetBehavior;
+    private ImageView mEventImageLike;
+    private ImageView mEventImageComment;
+    private ImageView mEventImageType;
+    private TextView mEventTextLike;
+    private TextView mEventTextType;
+    private TextView mEventTextLocation;
+    private TextView mEventTextTime;
+    private TrafficEvent mEvent;
 
     private ReportDialog dialog;
     private DatabaseReference database;
@@ -303,9 +317,9 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Report
         File file = new File(path);
         if (!file.exists()) {
             dialog.dismiss();
+            loadEventInVisibleMap();
             return;
         }
-
 
         Uri uri = Uri.fromFile(file);
         final StorageReference imgRef = storageRef.child("images/" + uri.getLastPathSegment() + "_" + System.currentTimeMillis());
@@ -327,6 +341,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Report
                 File file = new File(path);
                 file.delete();
                 dialog.dismiss();
+                loadEventInVisibleMap();
             }
         });
     }
@@ -373,7 +388,14 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Report
             public void onCancelled(DatabaseError databaseError) {
                 //TODO: do something
             }
+
         });
     }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        return false;
+    }
+
 
 }
