@@ -360,9 +360,9 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Report
                     double eventLatitude = event.getEvent_latitude();
                     double eventLongitude = event.getEvent_longitude();
 
-                    LatLng center = googleMap.getCameraPosition().target;
-                    double centerLatitude = center.latitude;
-                    double centerLongitude = center.longitude;
+                    locationTracker.getLocation();
+                    double centerLatitude = locationTracker.getLatitude();
+                    double centerLongitude = locationTracker.getLongitude();
 
                     int distance = Utils.distanceBetweenTwoLocations(centerLatitude, centerLongitude,
                             eventLatitude, eventLongitude);
