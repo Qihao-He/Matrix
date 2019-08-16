@@ -275,6 +275,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Report
 
         // adding marker
         googleMap.addMarker(marker);
+        loadEventInVisibleMap();
     }
 
     //Store the image into local disk
