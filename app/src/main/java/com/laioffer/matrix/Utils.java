@@ -1,6 +1,7 @@
 package com.laioffer.matrix;
 
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.location.Location;
 
 import org.apache.commons.codec.binary.Hex;
