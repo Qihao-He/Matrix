@@ -29,6 +29,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -42,14 +44,19 @@ import static android.app.Activity.RESULT_OK;
  */
 public class MainFragment extends Fragment implements OnMapReadyCallback, ReportDialog.DialogCallBack {
     private static final int REQUEST_CAPTURE_IMAGE = 100;
+    private final String path = Environment.getExternalStorageDirectory() + "/temp.png";
     private MapView mapView;
     private View view;
     private GoogleMap googleMap;
     private LocationTracker locationTracker;
     private FloatingActionButton fabReport;
     private FloatingActionButton fabFocus;
+
     private ReportDialog dialog;
     private DatabaseReference database;
+    private FirebaseStorage storage;
+    private StorageReference storageRef;
+
 
     public static MainFragment newInstance() {
 
@@ -70,6 +77,8 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Report
         view = inflater.inflate(R.layout.fragment_main, container,
                 false);
         database = FirebaseDatabase.getInstance().getReference();
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReference();
         return view;
     }
 
