@@ -108,6 +108,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Report
         database = FirebaseDatabase.getInstance().getReference();
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
+        verifyStoragePermissions(getActivity());
         return view;
     }
 
