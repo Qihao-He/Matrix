@@ -50,6 +50,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -420,19 +421,20 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Report
         if (url == null) {
             mEventImageType.setImageDrawable(ContextCompat.getDrawable(getContext(), Config.trafficMap.get(type)));
         } else {
-            new AsyncTask<Void, Void, Bitmap>() {
-                @Override
-                protected Bitmap doInBackground(Void... voids) {
-                    Bitmap bitmap = Utils.getBitmapFromURL(url);
-                    return bitmap;
-                }
-
-                @Override
-                protected void onPostExecute(Bitmap bitmap) {
-                    super.onPostExecute(bitmap);
-                    mEventImageType.setImageBitmap(bitmap);
-                }
-            }.execute();
+//            new AsyncTask<Void, Void, Bitmap>() {
+//                @Override
+//                protected Bitmap doInBackground(Void... voids) {
+//                    Bitmap bitmap = Utils.getBitmapFromURL(url);
+//                    return bitmap;
+//                }
+//
+//                @Override
+//                protected void onPostExecute(Bitmap bitmap) {
+//                    super.onPostExecute(bitmap);
+//                    mEventImageType.setImageBitmap(bitmap);
+//                }
+//            }.execute();
+            Picasso.get().load(url).into(mEventImageType);
         }
 
 
