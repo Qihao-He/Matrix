@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -415,7 +416,25 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Report
         mEventTextLike.setText(String.valueOf(likeNumber));
         mEventTextType.setText(type);
 
-        mEventImageType.setImageDrawable(ContextCompat.getDrawable(getContext(), Config.trafficMap.get(type)));
+        final String url = mEvent.getImgUri();
+        if (url == null) {
+            mEventImageType.setImageDrawable(ContextCompat.getDrawable(getContext(), Config.trafficMap.get(type)));
+        } else {
+            new AsyncTask<Void, Void, Bitmap>() {
+                @Override
+                protected Bitmap doInBackground(Void... voids) {
+                    Bitmap bitmap = Utils.getBitmapFromURL(url);
+                    return bitmap;
+                }
+
+                @Override
+                protected void onPostExecute(Bitmap bitmap) {
+                    super.onPostExecute(bitmap);
+                    mEventImageType.setImageBitmap(bitmap);
+                }
+            }.execute();
+        }
+
 
         if (user == null) {
             user = "";
