@@ -49,6 +49,10 @@ public class ReportDialog extends Dialog {
         void startCamera();
     }
 
+    public ReportDialog(@NonNull Context context) {
+        this(context, R.style.MyAlertDialogStyle);
+    }
+
     public ReportDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
     }
