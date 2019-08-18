@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -52,37 +54,41 @@ public class RegisterFragment extends OnBoardingBaseFragment {
 
                 database.child("user").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.hasChild(username)) {
-                            Toast.makeText(getContext(), "username is already registered, please change one",
-                                    Toast.LENGTH_LONG).show();
-                        } else if (!username.isEmpty() && !password.isEmpty()) {
+                            Toast.makeText(getActivity(), "username is already registered, please change one", Toast.LENGTH_SHORT).show();
+                        } else if (!username.equals("") && !password.equals("")) {
+                            // put username as key to set value
                             final User user = new User();
                             user.setUser_account(username);
                             user.setUser_password(Utils.md5Encryption(password));
                             user.setUser_timestamp(System.currentTimeMillis());
                             database.child("user").child(user.getUser_account()).setValue(user);
-                            Toast.makeText(getContext(), "user has successfully registered",
-                                    Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), "Successfully registered", Toast.LENGTH_SHORT).show();
                             goToLogin();
                         }
                     }
 
                     @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                    public void onCancelled(DatabaseError databaseError) {
+                        Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
         });
 
+        AdView mAdView = (AdView) view.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         return view;
     }
+
 
     private void goToLogin() {
         Activity activity = getActivity();
         if (activity != null && !activity.isFinishing()) {
-            ((OnBoardingActivity)activity).setCurrentPage(0);
+            ((OnBoardingActivity) activity).setCurrentPage(0);
         }
     }
 
