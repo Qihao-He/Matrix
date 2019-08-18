@@ -238,7 +238,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Report
     private void showDialog(String label, String prefillText) {
         int cx = (int) (fabReport.getX() + (fabReport.getWidth() / 2));
         int cy = (int) (fabReport.getY()) + fabReport.getHeight() + 56;
-        dialog = ReportDialog.newInstance(getContext(), cx, cy, this, "", "");
+        dialog = ReportDialog.newInstance(getContext(), cx, cy, this, label, prefillText);
         dialog.show();
     }
 
