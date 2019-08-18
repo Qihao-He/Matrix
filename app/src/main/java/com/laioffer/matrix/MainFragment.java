@@ -58,9 +58,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import static android.app.Activity.RESULT_OK;
+import static com.laioffer.matrix.Config.listItems;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -338,6 +340,29 @@ public class MainFragment extends Fragment implements OnMapReadyCallback, Report
                         fo.close();
                     } catch (IOException e) {
                         e.printStackTrace();
+                    }
+                }
+                break;
+            }
+            case REQ_CODE_SPEECH_INPUT: {
+                if (resultCode == RESULT_OK && null != data) {
+
+                    ArrayList<String> result = data
+                            .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    if (result.size() > 0) {
+                        final String sentence = result.get(0);
+                        boolean isMatch = false;
+                        for (int i = 0; i < listItems.size(); i++) {
+                            final String label = listItems.get(i).getDrawable_label();
+                            if (sentence.toLowerCase().contains(label.toLowerCase())) {
+                                Toast.makeText(getContext(), sentence, Toast.LENGTH_LONG).show();
+                                isMatch = true;
+                                break;
+                            }
+                        }
+                        if (!isMatch) {
+                            askSpeechInput("Try again");
+                        }
                     }
                 }
                 break;
